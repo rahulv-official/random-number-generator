@@ -1,6 +1,6 @@
 {
   "name": "@rahulv/rng",
-  "version": "0.0.2",
+  "version": "0.0.0",
   "description": "A secure random number generator.",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
