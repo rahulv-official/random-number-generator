@@ -1,29 +1,29 @@
 {
-  "name": "@rahulv.dev/rng",
-  "version": "0.0.1",
-  "description": "A secure random number generator.",
-  "main": "dist/index.js",
-  "types": "types/index.d.ts",
-  "scripts": {
-    "build": "tsc",
-    "postinstall": "npm run build"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/rahulv-official/random-number-generator.git"
-  },
-  "keywords": [
-    "random-number-generator",
-    "rng"
-  ],
-  "author": "Rahul Vashishtha <https://rahulv.dev>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/rahulv-official/random-number-generator/issues"
-  },
-  "homepage": "https://github.com/rahulv-official/random-number-generator#readme",
-  "devDependencies": {
-    "@types/node": "^22.0.0",
-    "typescript": "^5.5.4"
-  }
+    "name": "@rahulv.dev/rng",
+    "version": "1.0.0",
+    "description": "A secure random number generator.",
+    "main": "dist/index.js",
+    "types": "types/index.d.ts",
+    "scripts": {
+        "build": "tsc",
+        "postinstall": "npm run build"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/rahulv-official/random-number-generator.git"
+    },
+    "keywords": [
+        "random-number-generator",
+        "rng"
+    ],
+    "author": "Rahul Vashishtha <https://rahulv.dev>",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/rahulv-official/random-number-generator/issues"
+    },
+    "homepage": "https://github.com/rahulv-official/random-number-generator#readme",
+    "devDependencies": {
+        "@types/node": "^22.0.0",
+        "typescript": "^5.5.4"
+    }
 }
