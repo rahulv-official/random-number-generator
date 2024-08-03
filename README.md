@@ -34,9 +34,6 @@ pnpm install @rahulv.dev/rng
 ```typescript
 // For Node environment
 import { RNG } from "@rahulv.dev/rng";
-
-// For browser environment
-import { RNG } from "@rahulv.dev/rng/browser";
 ```
 
 ### Initializing the RNG
@@ -80,12 +77,12 @@ generateMultipleRandoms();
 
 ## API Reference
 
-Here’s a detailed look at the API methods provided by `@rahulv.dev/rng` and `@rahulv.dev/rng/browser`:
+Here’s a detailed look at the API methods provided by `@rahulv.dev/rng`:
 
-| Method              | Description                                                        | Parameters                                                                                                                          | Returns                                                                                                                           |
-| ------------------- | ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `next(upperLimit)`  | Generates a secure random number between `0` and `upperLimit - 1`. | `upperLimit: number`: The upper limit for the random number (exclusive)                                                             | `Promise<number>`: A random number within the specified range.                                                                    |
-| `nextRange(ranges)` | Generates random numbers for an array of upper limits.             | `ranges: number[]`: An array of upper limits. Each element specifies the exclusive upper limit for the corresponding random number. | `Promise<number[]>`: An array of random numbers, each within the range specified by the corresponding element in the input array. |
+| Method              | Description                                                        | Parameters                                                                                                                          | Returns                                                                                                                  |
+| ------------------- | ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `next(upperLimit)`  | Generates a secure random number between `0` and `upperLimit - 1`. | `upperLimit: number`: The upper limit for the random number (exclusive)                                                             | `number`: A random number within the specified range.                                                                    |
+| `nextRange(ranges)` | Generates random numbers for an array of upper limits.             | `ranges: number[]`: An array of upper limits. Each element specifies the exclusive upper limit for the corresponding random number. | `number[]`: An array of random numbers, each within the range specified by the corresponding element in the input array. |
 
 ### Usage Examples
 
