@@ -32,7 +32,11 @@ pnpm install @rahulv.dev/rng
 ### Importing the module
 
 ```typescript
+// For Node environment
 import { RNG } from "@rahulv.dev/rng";
+
+// For browser environment
+import { RNG } from "@rahulv.dev/rng/browser";
 ```
 
 ### Initializing the RNG
@@ -40,8 +44,8 @@ import { RNG } from "@rahulv.dev/rng";
 Before using the RNG, you need to initialize it:
 
 ```typescript
-async function setupRng() {
-    const rng = await RNG.init();
+function setupRng() {
+    const rng = new RNG();
     return rng;
 }
 ```
@@ -51,9 +55,9 @@ async function setupRng() {
 To generate a random number within a specified range:
 
 ```typescript
-async function generateRandom() {
-    const rng = await setupRng();
-    const randomNumber = await rng.next(100); // Generates a random number between 0 and 99
+function generateRandom() {
+    const rng = setupRng();
+    const randomNumber = rng.next(100); // Generates a random number between 0 and 99
     console.log(randomNumber);
 }
 
@@ -65,9 +69,9 @@ generateRandom();
 To generate a random number within a specified range:
 
 ```typescript
-async function generateMultipleRandoms() {
-    const rng = await setupRng();
-    const randomNumbers = await rng.nextRange([10, 100, 1000]);
+function generateMultipleRandoms() {
+    const rng = setupRng();
+    const randomNumbers = rng.nextRange([10, 100, 1000]);
     console.log(randomNumbers); // e.g., [2, 59, 874]
 }
 
@@ -76,11 +80,10 @@ generateMultipleRandoms();
 
 ## API Reference
 
-Here’s a detailed look at the API methods provided by `@rahulv.dev/rng`:
+Here’s a detailed look at the API methods provided by `@rahulv.dev/rng` and `@rahulv.dev/rng/browser`:
 
 | Method              | Description                                                        | Parameters                                                                                                                          | Returns                                                                                                                           |
 | ------------------- | ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `RNG.init()`        | Static method to initialize the RNG. Returns an instance of `RNG`. | None                                                                                                                                | `Promise<RNG>`: An initialized RNG                                                                                                |
 | `next(upperLimit)`  | Generates a secure random number between `0` and `upperLimit - 1`. | `upperLimit: number`: The upper limit for the random number (exclusive)                                                             | `Promise<number>`: A random number within the specified range.                                                                    |
 | `nextRange(ranges)` | Generates random numbers for an array of upper limits.             | `ranges: number[]`: An array of upper limits. Each element specifies the exclusive upper limit for the corresponding random number. | `Promise<number[]>`: An array of random numbers, each within the range specified by the corresponding element in the input array. |
 
@@ -91,20 +94,22 @@ Here is a complete usage examples of how to use the methods provided by `@rahulv
 ```typescript
 import { RNG } from "@rahulv.dev/rng";
 
-async function main() {
-    const rng = await RNG.init();
+function main() {
+    const rng = new RNG();
 
     // Generating a single random number
-    const randomNumber = await rng.next(100);
+    const randomNumber = rng.next(100);
     console.log(`Random Number: ${randomNumber}`);
 
     // Generating multiple random numbers
-    const randomNumbers = await rng.nextRange([10, 100, 1000]);
+    const randomNumbers = rng.nextRange([10, 100, 1000]);
     console.log(`Random Numbers: ${randomNumbers.join(", ")}`);
 }
 
 main();
 ```
+
+**NOTE**: If you are unable to use package with vite, install [Vite Pollyfills](https://www.npmjs.com/package/vite-plugin-node-polyfills).
 
 ## Contributing
 

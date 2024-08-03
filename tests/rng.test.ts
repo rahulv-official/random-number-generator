@@ -1,20 +1,31 @@
 import { describe, it, expect, beforeAll } from 'vitest';
-import { RNG } from '../src';
+
+let RNG: any;
+
+beforeAll(async () => {
+    if (typeof window !== 'undefined') {
+        // Browser environment
+        RNG = (await import('../src/rng.browser')).RNG;
+    } else {
+        // Node.js environment
+        RNG = (await import('../src/rng.node')).RNG;
+    }
+});
 
 describe('RNG Class', () => {
-    let rng: RNG;
+    let rng: any;
 
-    beforeAll(async () => {
-        rng = await RNG.init();
+    beforeAll(() => {
+        rng = new RNG();
     });
 
     it('should be initialized properly', () => {
         expect(rng).toBeDefined();
     });
 
-    it('should generate a random number within the given upper limit', async () => {
+    it('should generate a random number within the given upper limit', () => {
         const upperLimit = 100;
-        const randomNumber = await rng.next(upperLimit);
+        const randomNumber = rng.next(upperLimit);
         expect(randomNumber).toBeGreaterThanOrEqual(0);
         expect(randomNumber).toBeLessThan(upperLimit);
     });
@@ -27,9 +38,9 @@ describe('RNG Class', () => {
         );
     });
 
-    it('should generate random numbers within the given ranges', async () => {
+    it('should generate random numbers within the given ranges', () => {
         const ranges = [10, 50, 100];
-        const randomNumbers = await rng.nextRange(ranges);
+        const randomNumbers = rng.nextRange(ranges);
 
         expect(randomNumbers.length).toBe(ranges.length);
         randomNumbers.forEach((num, index) => {
@@ -38,10 +49,17 @@ describe('RNG Class', () => {
         });
     });
 
-    it('should throw an error if RNG is not initialized and next is called', async () => {
-        const uninitializedRng = new RNG();
-        await expect(uninitializedRng.next(10)).rejects.toThrowError(
-            'Rng not initialized. Use RNG.init() to initialize.'
+    it('should throw an error if RNG is not initialized and next is called', () => {
+        class UninitializedRNG extends RNG {
+            constructor() {
+                super();
+                this.crypto = null; // Simulate uninitialized state
+            }
+        }
+
+        const uninitializedRng = new UninitializedRNG();
+        expect(() => uninitializedRng.next(10)).toThrowError(
+            'Rng not initialized.'
         );
     });
 });
