@@ -1,4 +1,4 @@
-name: Publish Package
+name: Build & Release
 
 on:
     push:
@@ -6,31 +6,29 @@ on:
             - main
 
 jobs:
-    build:
+    release:
         runs-on: ubuntu-latest
 
         steps:
             - name: Checkout code
-              uses: actions/checkout@v3
+              uses: actions/checkout@main
 
             - name: Set up Node.js
-              uses: actions/setup-node@v3
+              uses: actions/setup-node@main
               with:
                   node-version: "20"
-                  registry-url: "https://registry.npmjs.org/"
 
             - name: Install dependencies
               run: npm install
 
-            - name: Bump version and tag
-              id: bump_version
-              uses: phips28/gh-action-bump-version@master
-              with:
-                  tag-prefix: "v"
+            - name: Build
+              run: npm run build
+
+            - name: Run Tests
+              run: npm run test
+
+            - name: Release to NPM
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-            - name: Publish to npm
-              run: npm publish --access public
-              env:
-                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+              run: npx semantic-release

@@ -5,9 +5,17 @@
     "main": "dist/index.js",
     "types": "types/index.d.ts",
     "scripts": {
-        "build": "tsc",
-        "postinstall": "npm run build"
+        "build": "tsc && vite build",
+        "dev": "vite",
+        "test": "vitest --run"
     },
+    "publishConfig": {
+        "access": "public"
+    },
+    "files": [
+        "dist",
+        "types"
+    ],
     "repository": {
         "type": "git",
         "url": "git+https://github.com/rahulv-official/random-number-generator.git"
@@ -23,7 +31,12 @@
     },
     "homepage": "https://github.com/rahulv-official/random-number-generator#readme",
     "devDependencies": {
+        "@semantic-release/git": "^10.0.1",
+        "@semantic-release/npm": "^12.0.1",
         "@types/node": "^22.0.0",
-        "typescript": "^5.5.4"
+        "semantic-release": "^24.0.0",
+        "typescript": "^5.5.4",
+        "vite": "^5.3.5",
+        "vitest": "^2.0.5"
     }
 }
