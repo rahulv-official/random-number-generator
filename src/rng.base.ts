@@ -18,7 +18,11 @@ export abstract class BaseRNG implements IRNG {
         minValue: number,
         maxValue: number
     ): number {
-        if (minValue >= maxValue) {
+        if(minValue == maxValue) {
+            return minValue;
+        }
+
+        if (minValue > maxValue) {
             throw new Error("minValue must be less than maxValue");
         }
 
